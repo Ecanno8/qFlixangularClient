@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-login-form.component.scss']  // Corrected property name
 })
 export class UserLoginFormComponent implements OnInit {
-  @Input() userData = { username: "", password: "" };
+  @Input() userData = { username: '', password: '' };
 
   constructor(
     public fetchApiData: FetchApiDataService,

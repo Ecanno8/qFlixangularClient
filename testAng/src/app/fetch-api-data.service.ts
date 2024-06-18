@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';  // Correct import path
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const apiUrl = 'https://movieflix-bf9931a77954.herokuapp.com';
+const apiUrl = 'https://movieflix-bf9931a77954.herokuapp.com/';
 
 @Injectable({
   providedIn: 'root'

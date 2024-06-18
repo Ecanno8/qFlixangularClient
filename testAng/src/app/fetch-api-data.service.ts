@@ -9,7 +9,7 @@ const apiUrl = 'https://movieflix-bf9931a77954.herokuapp.com';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class FetchApiDataService {
 
   constructor(private http: HttpClient) { }
 

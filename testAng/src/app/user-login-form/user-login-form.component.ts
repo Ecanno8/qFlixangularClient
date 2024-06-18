@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrl: './user-login-form.component.scss'
+  styleUrls: ['./user-login-form.component.scss']  // Corrected property name
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { username: "", password: "" };
@@ -21,23 +21,26 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void { }
 
   logInUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe(res => {
-      this.dialogRef.close();
-      this.snackBar.open(`Login success, Welcom ${res.user.username}`, "OK", {
-        duration: 2000
-      });
-      let user = {
-        id: res.user._id,
-        username: res.user.username,
-        birthday: res.user.birthday,
-        email: res.user.email,
-        token: res.token
+    this.fetchApiData.userLogin(this.userData).subscribe(
+      (res: any) => {  // Explicitly typing `res` as `any`
+        this.dialogRef.close();
+        this.snackBar.open(`Login success, Welcome ${res.user.username}`, "OK", {
+          duration: 2000
+        });
+        const user = {
+          id: res.user._id,
+          username: res.user.username,
+          birthday: res.user.birthday,
+          email: res.user.email,
+          token: res.token
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+      },
+      (err: any) => {  // Explicitly typing `err` as `any`
+        this.snackBar.open("Login failed", "OK", {
+          duration: 2000
+        });
       }
-      localStorage.setItem("user", JSON.stringify(user))
-    }, res => {
-      this.snackBar.open("Login fail", "OK", {
-        duration: 2000
-      })
-    })
+    );
   }
 }

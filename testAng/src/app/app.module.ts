@@ -13,12 +13,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent, // Corrected to include UserRegistrationFormComponent
-    UserLoginFormComponent
+    UserLoginFormComponent, MovieCardComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.scss']  // Corrected property name
+  styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { username: '', password: '' };
@@ -21,25 +21,22 @@ export class UserLoginFormComponent implements OnInit {
 
   logInUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
-      (res: any) => {  // Explicitly typing `res` as `any`
+      (result) => {
+        localStorage.setItem('user', result.User.Username);
+        localStorage.setItem('token', result.Token);
+
         this.dialogRef.close();
-        this.snackBar.open(`Login success, Welcome ${res.user.username}`, "OK", {
+
+        this.snackBar.open(`Login success, Welcome ${result.user.Username}`, "OK", {
           duration: 2000
         });
-        const user = {
-          id: res.user._id,
-          username: res.user.username,
-          birthday: res.user.birthday,
-          email: res.user.email,
-          token: res.token
-        };
-        localStorage.setItem("user", JSON.stringify(user));
       },
-      (err: any) => {  // Explicitly typing `err` as `any`
+      (err: any) => {
         this.snackBar.open("Login failed", "OK", {
           duration: 2000
         });
       }
     );
   }
+
 }

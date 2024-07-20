@@ -28,7 +28,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    UserRegistrationFormComponent, // Corrected to include UserRegistrationFormComponent
+    UserRegistrationFormComponent,
     UserLoginFormComponent, MovieCardComponent, WelcomePageComponent
   ],
   imports: [
@@ -36,7 +36,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule, // Corrected to use BrowserAnimationsModule
+    BrowserAnimationsModule,
     MatDialogModule,
     MatInputModule,
     MatButtonModule,

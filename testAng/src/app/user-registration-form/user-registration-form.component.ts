@@ -18,10 +18,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserRegistrationFormComponent {
   userData = {
-    username: '',
-    password: '',
-    email: '',
-    birthday: ''
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: ''
   };
 
   constructor(

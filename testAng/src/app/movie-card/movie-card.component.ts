@@ -52,7 +52,7 @@ export class MovieCardComponent implements OnInit {
       this.fetchApiData.deleteFavoriteMovie(user.id, movie.title).subscribe(res => {
         icon?.setAttribute("fontIcon", "favorite_border");
 
-        console.log("del success")
+        console.log("delete success")
         console.log(res);
         user.favoriteMovies = res.favoriteMovies;
         localStorage.setItem("user", JSON.stringify(user));

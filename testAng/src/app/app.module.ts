@@ -17,7 +17,15 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { RouterModule, Routes } from '@angular/router';
+import { MessageBoxComponent } from './message-box/message-box.component';
 
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 
 
@@ -25,9 +33,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
-    UserLoginFormComponent, MovieCardComponent, WelcomePageComponent, UserProfileComponent
+    UserLoginFormComponent, MovieCardComponent, WelcomePageComponent, UserProfileComponent, MessageBoxComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -38,7 +47,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   providers: [],

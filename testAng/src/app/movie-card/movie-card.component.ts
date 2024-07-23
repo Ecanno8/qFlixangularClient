@@ -7,7 +7,7 @@ import { MessageBoxComponent } from '../message-box/message-box.component';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrl: './movie-card.component.scss'
+  styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
@@ -25,14 +25,16 @@ export class MovieCardComponent implements OnInit {
     this.fetchApiData.getAllMovies().subscribe(res => {
       this.movies = res;
 
-      let user = JSON.parse(localStorage.getItem("user") || "");
-      this.movies.forEach((movie: any) => {
-        movie.isFavorite = user.favoriteMovies.includes(movie._id);
-      })
+      let user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user && user.favoriteMovies) {
+        this.movies.forEach((movie: any) => {
+          movie.isFavorite = user.favoriteMovies.includes(movie._id);
+        });
+      }
       return this.movies;
     }, err => {
-      console.error(err)
-    })
+      console.error(err);
+    });
   }
 
   logout(): void {
@@ -45,63 +47,63 @@ export class MovieCardComponent implements OnInit {
   }
 
   modifyFavoriteMovies(movie: any): void {
-    let user = JSON.parse(localStorage.getItem("user") || "");
+    let user = JSON.parse(localStorage.getItem("user") || "{}");
     let icon = document.getElementById(`${movie._id}-favorite-icon`);
 
-    if (user.favoriteMovies.includes(movie._id)) {
-      this.fetchApiData.deleteFavoriteMovie(user.id, movie.title).subscribe(res => {
-        icon?.setAttribute("fontIcon", "favorite_border");
+    if (user && user.favoriteMovies) {
+      if (user.favoriteMovies.includes(movie._id)) {
+        this.fetchApiData.deleteFavoriteMovie(user.id, movie.Title).subscribe(res => {
+          icon?.setAttribute("fontIcon", "favorite_border");
 
-        console.log("delete success")
-        console.log(res);
-        user.favoriteMovies = res.favoriteMovies;
-        localStorage.setItem("user", JSON.stringify(user));
-      }, err => {
-        console.error(err)
-      })
-    } else {
-      // icon?.setAttribute("fontIcon", "favorite");
-      // user.favoriteMovies.push(movie._id);
-      // addFavoriteMovie return unauth, debugging
-      this.fetchApiData.addFavoriteMovie(user.id, movie.title).subscribe(res => {
-        icon?.setAttribute("fontIcon", "favorite");
+          console.log("delete success");
+          console.log(res);
+          user.favoriteMovies = res.favoriteMovies;
+          localStorage.setItem("user", JSON.stringify(user));
+        }, err => {
+          console.error(err);
+        });
+      } else {
+        this.fetchApiData.addFavoriteMovie(user.id, movie.Title).subscribe(res => {
+          icon?.setAttribute("fontIcon", "favorite");
 
-        console.log("add success")
-        console.log(res);
-        user.favoriteMovies = res.favoriteMovies;
-        localStorage.setItem("user", JSON.stringify(user));
-      }, err => {
-        console.error(err)
-      })
+          console.log("add success");
+          console.log(res);
+          user.favoriteMovies = res.favoriteMovies;
+          localStorage.setItem("user", JSON.stringify(user));
+        }, err => {
+          console.error(err);
+        });
+      }
     }
-    localStorage.setItem("user", JSON.stringify(user));
   }
 
   showGenre(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
       data: {
-        title: String(movie.genre.type).toUpperCase(),
-        content: movie.genre.description
+        title: String(movie.Genre.type).toUpperCase(),
+        content: movie.Genre.Description
       },
       width: "400px"
-    })
+    });
   }
+
   showDirector(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
       data: {
-        title: movie.director.name,
-        content: movie.genre.description
+        title: movie.Director.Name,
+        content: movie.Director.Description
       },
       width: "400px"
-    })
+    });
   }
+
   showDetail(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
       data: {
-        title: movie.title,
-        content: movie.description
+        title: movie.Title,
+        content: movie.Description
       },
       width: "400px"
-    })
+    });
   }
 }

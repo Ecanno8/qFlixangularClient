@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   userData: any = {};
-  favoriteMovies: any[] = [];
+  FavoriteMovies: any[] = [];
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router
@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
-      this.getfavoriteMovies();
+      this.getFavoriteMovies();
     }, (err: any) => {
       console.error(err)
     })
@@ -42,10 +42,10 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(["movies"]);
   }
 
-  getfavoriteMovies(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.favoriteMovies = res.filter((movie: any) => {
-        return this.userData.favoriteMovies.includes(movie._id)
+      this.FavoriteMovies = res.filter((movie: any) => {
+        return this.userData.FavoriteMovies.includes(movie._id)
       })
     }, (err: any) => {
       console.error(err);
@@ -61,14 +61,14 @@ export class UserProfileComponent implements OnInit {
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
-      this.getfavoriteMovies();
+      this.getFavoriteMovies();
     })
   }
 
   removeFromFavorite(movie: any): void {
     this.fetchApiData.deleteFavoriteMovie(this.userData.id, movie.title).subscribe((res: any) => {
-      this.userData.favoriteMovies = res.favoriteMovies;
-      this.getfavoriteMovies();
+      this.userData.FavoriteMovies = res.FavoriteMovies;
+      this.getFavoriteMovies();
     }, (err: any) => {
       console.error(err)
     })

@@ -26,9 +26,9 @@ export class MovieCardComponent implements OnInit {
       this.movies = res;
 
       let user = JSON.parse(localStorage.getItem("user") || "{}");
-      if (user && user.favoriteMovies) {
+      if (user && user.FavoriteMovies) {
         this.movies.forEach((movie: any) => {
-          movie.isFavorite = user.favoriteMovies.includes(movie._id);
+          movie.isFavorite = user.FavoriteMovies.includes(movie._id);
         });
       }
       return this.movies;
@@ -50,25 +50,26 @@ export class MovieCardComponent implements OnInit {
     let user = JSON.parse(localStorage.getItem("user") || "{}");
     let icon = document.getElementById(`${movie._id}-favorite-icon`);
 
-    if (user && user.favoriteMovies) {
-      if (user.favoriteMovies.includes(movie._id)) {
+    if (user && user.FavoriteMovies) {
+      if (user.FavoriteMovies.includes(movie._id)) {
         this.fetchApiData.deleteFavoriteMovie(user.id, movie.Title).subscribe(res => {
           icon?.setAttribute("fontIcon", "favorite_border");
 
           console.log("delete success");
           console.log(res);
-          user.favoriteMovies = res.favoriteMovies;
+          user.FavoriteMovies = res.FavoriteMovies;
           localStorage.setItem("user", JSON.stringify(user));
         }, err => {
           console.error(err);
         });
       } else {
-        this.fetchApiData.addFavoriteMovie(user.id, movie.Title).subscribe(res => {
+        console.log('message')
+        this.fetchApiData.addFavoriteMovie(user.id, movie._id).subscribe(res => {
           icon?.setAttribute("fontIcon", "favorite");
 
           console.log("add success");
           console.log(res);
-          user.favoriteMovies = res.favoriteMovies;
+          user.FavoriteMovies = res.FavoriteMovies;
           localStorage.setItem("user", JSON.stringify(user));
         }, err => {
           console.error(err);
@@ -80,7 +81,7 @@ export class MovieCardComponent implements OnInit {
   showGenre(movie: any): void {
     this.dialog.open(MessageBoxComponent, {
       data: {
-        title: String(movie.Genre.type).toUpperCase(),
+        title: String(movie.Genre.Name).toUpperCase(),
         content: movie.Genre.Description
       },
       width: "400px"

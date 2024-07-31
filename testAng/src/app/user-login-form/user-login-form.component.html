@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Sign Up!</mat-card-title>
+        <mat-card-title>Log In!</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form (ngSubmit)="logInUser()">
@@ -12,7 +12,7 @@
                 <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password" name="password"
                     required>
             </mat-form-field>
-            <button mat-raised-button type="submit" color="primary">Sign Up</button>
+            <button mat-raised-button type="submit" color="primary">Log In</button>
         </form>
     </mat-card-content>
 </mat-card>

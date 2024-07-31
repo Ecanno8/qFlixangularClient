@@ -1,0 +1,51 @@
+/* Style for the buttons */
+button[mat-raised-button] {
+    margin-right: 10px;
+}
+
+/* Style for the user profile card */
+mat-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the form fields */
+mat-form-field {
+    margin-right: 10px;
+    width: 100%;
+    /* Make the form fields take full width for better alignment */
+}
+
+/* Style for the favorite movies section */
+.favorite-movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+/* Style for each favorite movie card */
+.favorite-movie-card {
+    width: 280px;
+    margin-right: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the image within each favorite movie card */
+.favorite-movie-card img {
+    width: 100%;
+    /* Ensures the image takes the full width of the card */
+    height: 300px;
+    /* Fixed height */
+    object-fit: cover;
+    /* Ensures the image covers the specified dimensions */
+}
+
+/* Style for the card header and actions */
+mat-card-header,
+mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

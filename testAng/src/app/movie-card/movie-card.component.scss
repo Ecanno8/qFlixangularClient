@@ -1,0 +1,30 @@
+/* Style for the movie card container */
+.movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 16px;
+}
+
+/* Style for each individual movie card */
+mat-card {
+    flex: 1 1 auto;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the image within each movie card */
+mat-card img {
+    width: 100%;
+    /* Ensures the image takes the full width of the card */
+    height: 300px;
+    /* Fixed height */
+    object-fit: cover;
+    /* Ensures the image covers the specified dimensions */
+}
+
+/* Optional: Add styles for favorite icon */
+mat-icon {
+    cursor: pointer;
+    color: red;
+}
